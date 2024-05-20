@@ -204,12 +204,9 @@ export const getWorkoutsByDate = async (req, res, next) => {
     );
 
     const todaysWorkouts = await Workout.find({
-      $match: {
-        user: user._id,
-        date: { $gte: startOfDay, $lt: endOfDay },
-      },
+      user: user._id,
+      date: { $gte: startOfDay, $lt: endOfDay },
     });
-    console.log(todaysWorkouts);
     const totalCaloriesBurnt = todaysWorkouts.reduce(
       (total, workout) => total + workout.caloriesBurned,
       0
